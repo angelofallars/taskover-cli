@@ -37,10 +37,11 @@ def main():
     con = sqlite3.connect(DATABASE)
     cur = con.cursor()
 
-    # Check the list of tasks
+    # Select the list of tasks
     cur.execute("SELECT id, title, description FROM tasklist")
     rows = cur.fetchall()
 
+    # Print them out
     for row in rows:
         print("TASK {}: {}".format(row[0], row[1]))
         if row[2] != '':
