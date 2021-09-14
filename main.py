@@ -25,11 +25,15 @@ def main():
                        """)
 
         # First task
-        cur.execute("""INSERT INTO tasklist VALUES(1,'Clean the room', 'You need to clean your room now!')""")
+        cur.execute("""INSERT INTO tasklist(title, description)
+                       VALUES('Clean the room',
+                              'You need to clean your room now!')""")
         # Second task
-        cur.execute("""INSERT INTO tasklist VALUES(2,'Do the biology homework','')""")
+        cur.execute("""INSERT INTO tasklist(title, description)
+                       VALUES('Do the biology homework', NULL)""")
         # Third task
-        cur.execute("""INSERT INTO tasklist VALUES(3,'Make a sandwich','')""")
+        cur.execute("""INSERT INTO tasklist(title, description)
+                       VALUES('Make a sandwich', NULL)""")
 
         # Save and close the database
         con.commit()
