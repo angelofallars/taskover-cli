@@ -11,7 +11,7 @@ def main():
 
     # Check if a list.db file exists
     if not path.isfile(DATABASE):
-        # Create a databse because it doesn't exist
+        # Create a database because it doesn't exist
         open(DATABASE, "w", encoding="utf-8").close()
         print("Created new SQL database.")
 
@@ -20,7 +20,8 @@ def main():
 
         # Make a SQL table in the database
         cur.execute("""CREATE TABLE tasklist
-                       (id integer PRIMARY KEY,title TEXT ,description TEXT)
+                       (id INTEGER PRIMARY KEY, title TEXT, description TEXT,
+                        done INTEGER)
                        """)
 
         # First task
@@ -46,7 +47,7 @@ def main():
         print("TASK {}: {}".format(row[0], row[1]))
         if row[2] != '':
             print("    {}".format(row[2]))
-    
+
     con.commit()
     con.close()
     return 0
