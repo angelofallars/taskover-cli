@@ -29,8 +29,8 @@ def main():
                        VALUES('Clean the room',
                               'You need to clean your room now!')""")
         # Second task
-        cur.execute("""INSERT INTO tasklist(title, description)
-                       VALUES('Do the biology homework', NULL)""")
+        cur.execute("""INSERT INTO tasklist(title, description, finished)
+                       VALUES('Do the biology homework', NULL, 1)""")
         # Third task
         cur.execute("""INSERT INTO tasklist(title, description)
                        VALUES('Make a sandwich', NULL)""")
@@ -43,11 +43,18 @@ def main():
     cur = con.cursor()
 
     # Select the list of tasks
-    cur.execute("SELECT id, title, description FROM tasklist")
+    cur.execute("SELECT id, title, description, finished FROM tasklist")
     rows = cur.fetchall()
 
     # Print them out
     for row in rows:
+
+        # Task completion
+        if row[3]:
+            print("[x] ", end="")
+        else:
+            print("[ ] ", end="")
+
         print("{}: {}".format(row[0], row[1]))
         if row[2] != '':
             print("    {}".format(row[2]))
