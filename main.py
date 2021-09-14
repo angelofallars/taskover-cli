@@ -21,7 +21,7 @@ def main():
         # Make a SQL table in the database
         cur.execute("""CREATE TABLE tasklist
                        (id INTEGER PRIMARY KEY, title TEXT, description TEXT,
-                        done INTEGER)
+                        finished INTEGER DEFAULT 0)
                        """)
 
         # First task
@@ -48,7 +48,7 @@ def main():
 
     # Print them out
     for row in rows:
-        print("TASK {}: {}".format(row[0], row[1]))
+        print("{}: {}".format(row[0], row[1]))
         if row[2] != '':
             print("    {}".format(row[2]))
 
