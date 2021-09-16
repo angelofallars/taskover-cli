@@ -20,8 +20,23 @@ def clear():
 
 def id_from_input(task_ids):
     """Get an ID of a task from user input"""
-    index = int(input("$ ")) - 1
-    return task_ids[index]
+
+    while True:
+        index = int(input("$ ")) - 1
+
+        # Reject negative numbers because they
+        # work in lists and we accept only positive input
+        if index <= -1:
+            print("That task doesn't exist.")
+            continue
+
+        try:
+            id = task_ids[index]
+        except (IndexError, ValueError):
+            print("That task doesn't exist.")
+            continue
+
+        return id
 
 
 def print_list(cursor, numbering=False):
@@ -107,8 +122,8 @@ def main():
 
         # Add
         if option == '1':
-            title = input("Title of task: ")
-            description = input("Description of task (Can be blank): ")
+            title = input("Title of task: $ ")
+            description = input("Description of task (Optional): $ ")
 
             cur.execute("""INSERT INTO tasklist(title, description)
                            VALUES(?, ?)""", (title, description))
