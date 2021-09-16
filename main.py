@@ -166,6 +166,7 @@ def main():
 
         else:
             print("Unrecognized input. Try again.")
+            input()
 
     con.commit()
     con.close()
