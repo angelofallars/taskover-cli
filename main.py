@@ -119,7 +119,7 @@ def main():
     while True:
         clear()
 
-        print("===== TODO LIST BY ANGELO-F =====")
+        print("========TASKOVER BETA============")
         task_ids = print_list(cur)
         print("=================================")
         option = input("(1) Add (2) Delete (3) Mark as done (4) Exit\n$ ")
@@ -135,7 +135,7 @@ def main():
         # Delete
         elif option == '2':
             clear()
-            print("===== TODO LIST BY ANGELO-F =====")
+            print("========TASKOVER BETA============")
             task_ids = print_list(cur, numbering=True)
             print("=================================")
 
@@ -148,7 +148,7 @@ def main():
         # Mark as done
         elif option == '3':
             clear()
-            print("===== TODO LIST BY ANGELO-F =====")
+            print("========TASKOVER BETA============")
             task_ids = print_list(cur, numbering=True)
             print("=================================")
 
