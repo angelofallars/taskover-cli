@@ -5,6 +5,26 @@ from os import path
 DATABASE = "./list.db"
 
 
+def printlist(cursor):
+    """Print the current todo list"""
+
+    # Select the list of tasks
+    cursor.execute("SELECT id, title, description, finished FROM tasklist")
+
+    # Fetch the results
+    rows = cursor.fetchall()
+
+    for row in rows:
+
+        # Task completion
+        if row[3]:
+            print("[x] ", end="")
+        else:
+            print("[ ] ", end="")
+
+        print("{}\n    {}".format(row[1], row[2]))
+
+
 def main():
     """The main function"""
     print("TODO LIST by Angelo")
@@ -42,22 +62,7 @@ def main():
     con = sqlite3.connect(DATABASE)
     cur = con.cursor()
 
-    # Select the list of tasks
-    cur.execute("SELECT id, title, description, finished FROM tasklist")
-    rows = cur.fetchall()
-
-    # Print them out
-    for row in rows:
-
-        # Task completion
-        if row[3]:
-            print("[x] ", end="")
-        else:
-            print("[ ] ", end="")
-
-        print("{}: {}".format(row[0], row[1]))
-        if row[2] != '':
-            print("    {}".format(row[2]))
+    printlist(cur)
 
     con.commit()
     con.close()
