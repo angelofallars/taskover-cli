@@ -22,17 +22,21 @@ def id_from_input(task_ids):
     """Get an ID of a task from user input"""
 
     while True:
-        index = int(input("$ ")) - 1
+        index = input("$ ")
 
-        # Reject negative numbers because they
-        # work in lists and we accept only positive input
-        if index <= -1:
+        # Return none if no input
+        if index == "":
+            return None
+
+        try:
+            id = task_ids[int(index) - 1]
+        except (IndexError, ValueError):
             print("That task doesn't exist.")
             continue
 
-        try:
-            id = task_ids[index]
-        except (IndexError, ValueError):
+        # Reject negative numbers because they
+        # work in lists and we accept only positive input
+        if int(index) <= -1:
             print("That task doesn't exist.")
             continue
 
@@ -76,7 +80,7 @@ def print_list(cursor, numbering=False):
 
         # Print the description (Don't print blank descriptions)
         if row[2] != "":
-            print("    {}".format(row[2]))
+            print("      {}".format(row[2]))
 
     return task_ids
 
@@ -118,7 +122,7 @@ def main():
         print("===== TODO LIST BY ANGELO-F =====")
         task_ids = print_list(cur)
         print("=================================")
-        option = input("[1] Add [2] Delete [3] Mark as done [4] Exit\n$ ")
+        option = input("(1) Add (2) Delete (3) Mark as done (4) Exit\n$ ")
 
         # Add
         if option == '1':
