@@ -82,7 +82,7 @@ def print_list(cursor, numbering=False):
 
 def main():
     """The main function"""
-    print("TODO LIST by Angelo")
+    print("Taskover - A todo-list by Angelo-F")
 
     # Check if a list.db file exists
     if not path.isfile(DATABASE):
@@ -118,7 +118,7 @@ def main():
         task_ids = print_list(cur)
         print(SEPARATOR)
         option = input("(i) Insert (d) Delete (m) Mark as done (q) Quit\n$ ")\
-                 .lower()
+        .lower()
 
         # Add
         if option == 'i':
@@ -159,7 +159,7 @@ def main():
         elif option == 'q':
             print("Thanks for running my program!")
             break
-        
+  
         # Continue the program as usual if no/wrong input
         else:
             pass
