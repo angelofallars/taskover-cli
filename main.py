@@ -117,10 +117,11 @@ def main():
         print(TITLE)
         task_ids = print_list(cur)
         print(SEPARATOR)
-        option = input("(1) Add (2) Delete (3) Mark as done (4) Exit\n$ ")
+        option = input("(i) Insert (d) Delete (m) Mark as done (q) Quit\n$ ")\
+                 .lower()
 
         # Add
-        if option == '1':
+        if option == 'i':
             title = input("Title of task: $ ")
             description = input("Description of task (Optional): $ ")
 
@@ -128,7 +129,7 @@ def main():
                            VALUES(?, ?)""", (title, description))
 
         # Delete
-        elif option == '2':
+        elif option == 'd':
             clear()
             print(TITLE)
             task_ids = print_list(cur, numbering=True)
@@ -141,7 +142,7 @@ def main():
                         (id_to_delete, ))
 
         # Mark as done
-        elif option == '3':
+        elif option == 'm':
             clear()
             print(TITLE)
             task_ids = print_list(cur, numbering=True)
@@ -155,13 +156,13 @@ def main():
                            WHERE id = ?""", (id_to_mark, ))
 
         # Exit
-        elif option == '4':
+        elif option == 'q':
             print("Thanks for running my program!")
             break
-
+        
+        # Continue the program as usual if no/wrong input
         else:
-            print("Unrecognized input. Try again.")
-            input()
+            pass
 
     con.commit()
     con.close()
