@@ -1,21 +1,14 @@
 """To-do list with Python and SQL"""
 import sqlite3
-from os import path
-from os import system
+from os import path, system
 from os import name as os_name
 
 DATABASE = "./list.db"
 
 
 def clear():
-    """Clear the screen.
-
-    Terminal command for clearing screen varies depending
-    on the operating system"""
-    if os_name == "nt":
-        system("cls")
-    else:
-        system("clear")
+    """Clear the screen."""
+    system("cls" if os_name == "nt" else "clear")
 
 
 def id_from_input(task_ids):
