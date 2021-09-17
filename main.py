@@ -4,6 +4,8 @@ from os import path, system
 from os import name as os_name
 
 DATABASE = "./list.db"
+TITLE = "========TASKOVER BETA============"
+SEPARATOR = "================================="
 
 
 def clear():
@@ -112,9 +114,9 @@ def main():
     while True:
         clear()
 
-        print("========TASKOVER BETA============")
+        print(TITLE)
         task_ids = print_list(cur)
-        print("=================================")
+        print(SEPARATOR)
         option = input("(1) Add (2) Delete (3) Mark as done (4) Exit\n$ ")
 
         # Add
@@ -128,9 +130,9 @@ def main():
         # Delete
         elif option == '2':
             clear()
-            print("========TASKOVER BETA============")
+            print(TITLE)
             task_ids = print_list(cur, numbering=True)
-            print("=================================")
+            print(SEPARATOR)
 
             print("Which task to delete?")
             id_to_delete = id_from_input(task_ids)
@@ -141,9 +143,9 @@ def main():
         # Mark as done
         elif option == '3':
             clear()
-            print("========TASKOVER BETA============")
+            print(TITLE)
             task_ids = print_list(cur, numbering=True)
-            print("=================================")
+            print(SEPARATOR)
 
             print("Which task to mark as done/undone?")
             id_to_mark = id_from_input(task_ids)
