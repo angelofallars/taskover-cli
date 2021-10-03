@@ -108,7 +108,7 @@ def main():
         print(TITLE)
         task_ids = print_list(cur)
         print(SEPARATOR)
-        option = input("(i) Insert (d) Delete (m) Mark as done (q) Quit\n$ ")\
+        option = input("(i) Insert (u) Update (d) Delete (m) Mark as done (q) Quit\n$ ")\
         .lower()
 
         # Add
@@ -144,6 +144,22 @@ def main():
             cur.execute("""UPDATE tasklist
                            SET finished = NOT finished
                            WHERE id = ?""", (id_to_mark, ))
+
+        # Update
+        elif option == 'u':
+            clear()
+            print(TITLE)
+            task_ids = print_list(cur, numbering=True)
+            print(SEPARATOR)
+
+            print("Which task description to update?")
+            id_to_update = id_from_input(task_ids)
+
+            new_description = input("New description:\n$ ")
+
+            cur.execute("""UPDATE tasklist
+                           SET title = ?
+                           WHERE id = ?""", (new_description, id_to_update,))
 
         # Exit
         elif option == 'q':
