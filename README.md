@@ -20,9 +20,9 @@ This program is minimal and only requires Python 3. If you know some Python, it'
 
 `cd taskover`
 
+Linux:
 `chmod +x ./taskover`
 
-Linux only:
 `ln -s </path/to/taskover/executable> ~/.local/bin`
 
 ## Usage
