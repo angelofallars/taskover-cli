@@ -139,8 +139,13 @@ Please report bugs to https://github.com/angelofallars/taskover""")
 
         task_ids = print_list(cur)
 
-        option = input("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit\n$ ")\
-        .lower()
+        print("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit\n$ ",
+                end="")
+
+        # Commit every time so updates are instantly reflected in database
+        con.commit()
+
+        option = input("").lower()
 
         # Add
         if option == 'i':
