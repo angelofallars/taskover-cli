@@ -86,7 +86,14 @@ def main():
 usage: python [options]
 
 --help
-   Dispaly this help message.
+   Display this help message.
+
+Program keywords:
+- i - Insert a new task
+- u - Update the description of a task
+- m - Mark a task as done (or unmark a completed task)
+- d - Delete a task
+- q - Quit the program
 
 Please report bugs to https://github.com/angelofallars/taskover""")
         return 0
