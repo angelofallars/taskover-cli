@@ -1,8 +1,8 @@
 # Taskover
 
-![image](https://i.imgur.com/PBA0LaH.png)
-
 A simple and fast todo list made in `Python`.
+
+![image](https://i.imgur.com/PBA0LaH.png)
 
 Easily manage your tasks with this terminal-based tool.
 
