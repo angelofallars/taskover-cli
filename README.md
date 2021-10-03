@@ -8,7 +8,7 @@ A simple todo list tool made in `python`. Manage your tasks all from the termina
 
 - i - Insert a new task
 - u - Update the description of a task
-- m - Mark a task as done
+- m - Mark a task as done (or unmark a completed task)
 - d - Delete a task
 - q - Quit the program
 
