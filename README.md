@@ -26,6 +26,10 @@ Linux:
 
 `ln -s </path/to/taskover/executable> ~/.local/bin`
 
+Run on Windows:
+
+`python3 .\taskover`
+
 ## Usage
 
 `taskover` - Run the program
