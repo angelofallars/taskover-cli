@@ -29,9 +29,9 @@ def id_from_input(task_ids):
             print("Out of range.")
             continue
 
-        # Reject negative numbers because they
+        # Reject zero and negative numbers because they
         # work in lists and we accept only positive input
-        if int(index) <= -1:
+        if int(index) <= 0:
             print("Out of range.")
             continue
 
