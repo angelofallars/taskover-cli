@@ -2,6 +2,7 @@
 import sqlite3
 from os import path, system
 from os import name as os_name
+from sys import argv
 
 DATABASE = "./list.db"
 TITLE = "========TASKOVER BETA============"
@@ -78,6 +79,19 @@ def print_list(cursor, numbering=False):
 
 def main():
     """The main function"""
+
+    # Help message
+    if argv[1] == "--help":
+        print("""Taskover - A todo-list by Angelo-F
+usage: python [options]
+
+--help
+   Dispaly this help message.
+
+Please report bugs to https://github.com/angelofallars/taskover""")
+        return 0
+
+
     print("Taskover - A todo-list by Angelo-F")
 
     # Check if a list.db file exists
