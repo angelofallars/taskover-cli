@@ -117,13 +117,20 @@ Program keywords:
 Please report bugs to https://github.com/angelofallars/taskover""")
         
         # Print list
-        if argv[1] == "list":
+        elif argv[1] == "list":
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
 
-            print_list(cur, numbering=True, extra_text=False)
+            task_ids = print_list(cur, numbering=True, extra_text=False)
 
-    return 0
+            if not task_ids:
+                print("No tasks")
+
+        else:
+            print("""usage: taskover [options]
+see 'taskover help' for more options""")
+
+        return 0
 
 
     print("Taskover - A todo-list by Angelo-F")
