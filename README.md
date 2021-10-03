@@ -2,7 +2,7 @@
 
 ![image](https://i.imgur.com/WMxJw4m.png)
 
-A simple todo list tool made in `python`. Manage your tasks all from the terminal! _BETA version_
+A simple todo list tool made in `python` and `SQL`. Manage your tasks all from the terminal! _BETA version_
 
 ## Usage
 
@@ -14,7 +14,7 @@ A simple todo list tool made in `python`. Manage your tasks all from the termina
 
 ## Requirements
 
-`python 3`
+`python3`
 
 ## How to run
 
@@ -22,4 +22,4 @@ A simple todo list tool made in `python`. Manage your tasks all from the termina
 
 `cd taskover`
 
-`python3 main.py`
+`./taskover`
