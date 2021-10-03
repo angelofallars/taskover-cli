@@ -93,8 +93,8 @@ def main():
 
     # Help message
     if len(argv) > 1 and argv[1] == "--help":
-        print("""Taskover - A todo-list by Angelo-F
-usage: python [options]
+        print("""Taskover - A fast and hackable task list written in Python and SQL
+usage: taskover [options]
 
 --help
    Display this help message.
@@ -145,6 +145,10 @@ Please report bugs to https://github.com/angelofallars/taskover""")
         # Add
         if option == 'i':
             title = input("Title of task: $ ")
+
+            # Continue if input title is blank
+            if not title:
+                continue
 
             cur.execute("""INSERT INTO tasklist(title)
                            VALUES(?)""", (title,))
@@ -201,7 +205,6 @@ Please report bugs to https://github.com/angelofallars/taskover""")
 
                 new_description = input("New description:\n$ ")
 
-                # Continue to main menu if no input
                 if not new_description:
                     continue
 
