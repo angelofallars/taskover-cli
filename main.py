@@ -212,10 +212,6 @@ Please report bugs to https://github.com/angelofallars/taskover""")
             print("Thanks for running my program!")
             break
 
-        # Continue the program as usual if no/wrong input
-        else:
-            pass
-
     con.commit()
     con.close()
     return 0
