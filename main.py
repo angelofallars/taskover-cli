@@ -211,7 +211,7 @@ Please report bugs to https://github.com/angelofallars/taskover""")
         elif option == 'q':
             print("Thanks for running my program!")
             break
-  
+
         # Continue the program as usual if no/wrong input
         else:
             pass
