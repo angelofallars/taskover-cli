@@ -245,7 +245,6 @@ see 'taskover help' for more options""")
 
         # Exit
         elif option == 'q':
-            print("Thanks for running my program!")
             break
 
     con.commit()
