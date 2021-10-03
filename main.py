@@ -186,26 +186,31 @@ Please report bugs to https://github.com/angelofallars/taskover""")
 
         # Update
         elif option == 'u':
-            clear()
 
-            task_ids = print_list(cur, numbering=True)
+            if len(task_ids) > 0:
+                clear()
 
-            print("Which task description to update?")
-            id_to_update = id_from_input(task_ids)
+                task_ids = print_list(cur, numbering=True)
 
-            # Continue to main menu if no input
-            if not id_from_input:
-                continue
+                print("Which task description to update?")
+                id_to_update = id_from_input(task_ids)
 
-            new_description = input("New description:\n$ ")
+                # Continue to main menu if no input
+                if not id_from_input:
+                    continue
 
-            # Continue to main menu if no input
-            if not new_description:
-                continue
+                new_description = input("New description:\n$ ")
 
-            cur.execute("""UPDATE tasklist
-                           SET title = ?
-                           WHERE id = ?""", (new_description, id_to_update,))
+                # Continue to main menu if no input
+                if not new_description:
+                    continue
+
+                cur.execute("""UPDATE tasklist
+                               SET title = ?
+                               WHERE id = ?""", (new_description, id_to_update,))
+            else:
+                print("No tasks to update")
+                input()
 
         # Exit
         elif option == 'q':
