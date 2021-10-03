@@ -26,13 +26,13 @@ def id_from_input(task_ids):
         try:
             id = task_ids[int(index) - 1]
         except (IndexError, ValueError):
-            print("That task doesn't exist.")
+            print("Out of range.")
             continue
 
         # Reject negative numbers because they
         # work in lists and we accept only positive input
         if int(index) <= -1:
-            print("That task doesn't exist.")
+            print("Out of range.")
             continue
 
         return id
@@ -193,7 +193,15 @@ Please report bugs to https://github.com/angelofallars/taskover""")
             print("Which task description to update?")
             id_to_update = id_from_input(task_ids)
 
+            # Continue to main menu if no input
+            if not id_from_input:
+                continue
+
             new_description = input("New description:\n$ ")
+
+            # Continue to main menu if no input
+            if not new_description:
+                continue
 
             cur.execute("""UPDATE tasklist
                            SET title = ?
