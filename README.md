@@ -6,7 +6,7 @@ A simple and fast todo list made in `Python`.
 
 Stay on top of your tasks with this terminal-based tool. Add tasks with ease, mark them as done and delete them when you're finished.
 
-Due to being made in Python, it's easy to hack and modify this program to suit your needs.
+This program is minimal and only requires Python 3. If you know some Python, it's easy to hack and change this program to suit your needs.
 
 ## Dependencies
 
