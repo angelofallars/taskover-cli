@@ -81,7 +81,7 @@ def main():
     """The main function"""
 
     # Help message
-    if argv[1] == "--help":
+    if len(argv) > 1 and argv[1] == "--help":
         print("""Taskover - A todo-list by Angelo-F
 usage: python [options]
 
