@@ -4,7 +4,7 @@ A simple and fast todo list made in `Python`.
 
 ![image](https://i.imgur.com/PBA0LaH.png)
 
-Easily manage your tasks with this terminal-based tool.
+Stay on top of your tasks with this terminal-based tool. Add tasks with ease, mark them as done and delete them when you're finished.
 
 Due to being made in Python, it's easy to hack and modify this program to suit your needs.
 
