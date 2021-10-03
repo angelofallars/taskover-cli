@@ -2,6 +2,8 @@
 
 A simple and fast todo list made in `Python`.
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+
 ![image](https://i.imgur.com/PBA0LaH.png)
 
 Stay on top of your tasks with this terminal-based tool! Add tasks with ease, mark them as done and delete them when you're finished.
@@ -42,5 +44,3 @@ q - Quit the program
 
 This project is still in progress. Feel free to make a fork and contribute
 changes you think will be good!
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
