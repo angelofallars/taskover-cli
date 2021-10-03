@@ -108,7 +108,7 @@ def main():
         print(TITLE)
         task_ids = print_list(cur)
         print(SEPARATOR)
-        option = input("(i) Insert (u) Update (d) Delete (m) Mark as done (q) Quit\n$ ")\
+        option = input("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit\n$ ")\
         .lower()
 
         # Add

@@ -4,6 +4,14 @@
 
 A simple todo list tool made in `python`. Manage your tasks all from the terminal! _BETA version_
 
+## Usage
+
+- i - Insert a new task
+- u - Update the description of a task
+- m - Mark a task as done
+- d - Delete a task
+- q - Quit the program
+
 ## Requirements
 
 `python 3`
