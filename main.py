@@ -38,14 +38,15 @@ def id_from_input(task_ids):
         return id
 
 
-def print_list(cursor, numbering=False):
+def print_list(cursor, numbering=False, extra_text=True):
     """Print the current todo list.
 
     Returns the IDs of the tasks ordered in a list.
 
     Args:
         cursor - the SQL cursor
-        numbering - add numbering to the displayed list"""
+        numbering - add numbering to the displayed list
+        extra_text - If there should be extra text above and below the tasks"""
 
     task_ids = []
 
@@ -58,7 +59,8 @@ def print_list(cursor, numbering=False):
     # Display numbers if needed to print numbers of list
     number = 1
 
-    print(TITLE)
+    if extra_text:
+        print(TITLE)
 
     for row in rows:
         task_ids.append(row[0])
@@ -83,7 +85,8 @@ def print_list(cursor, numbering=False):
     else:
         task_count = "no tasks"
 
-    print("--- {} ---".format(task_count))
+    if extra_text:
+        print("--- {} ---".format(task_count))
 
     return task_ids
 
@@ -91,13 +94,18 @@ def print_list(cursor, numbering=False):
 def main():
     """The main function"""
 
-    # Help message
-    if len(argv) > 1 and argv[1] == "--help":
-        print("""Taskover - A fast and hackable task list written in Python and SQL
+    if len(argv) > 1:
+
+        if argv[1] == "help":
+            # Help message
+            print("""Taskover - A fast and hackable task list written in Python and SQL.
 usage: taskover [options]
 
---help
-   Display this help message.
+help
+  Display this help message.
+
+list
+  Print the tasks ordered numerically and exit. Useful for scripting.
 
 Program keywords:
 - i - Insert a new task
@@ -107,7 +115,15 @@ Program keywords:
 - q - Quit the program
 
 Please report bugs to https://github.com/angelofallars/taskover""")
-        return 0
+        
+        # Print list
+        if argv[1] == "list":
+            con = sqlite3.connect(DATABASE)
+            cur = con.cursor()
+
+            print_list(cur, numbering=True, extra_text=False)
+
+    return 0
 
 
     print("Taskover - A todo-list by Angelo-F")
