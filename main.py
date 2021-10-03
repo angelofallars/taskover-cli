@@ -50,7 +50,7 @@ def print_list(cursor, numbering=False):
     task_ids = []
 
     # Select the list of tasks
-    cursor.execute("SELECT id, title, description, finished FROM tasklist")
+    cursor.execute("SELECT id, title, finished FROM tasklist")
 
     # Fetch the results
     rows = cursor.fetchall()
@@ -65,17 +65,13 @@ def print_list(cursor, numbering=False):
             print("{}. ".format(number), end="")
             number += 1
 
-        if row[3]:
+        if row[2]:
             print("[x] ", end="")
         else:
             print("[ ] ", end="")
 
         # Print the title
         print("{}".format(row[1]))
-
-        # Print the description (Don't print blank descriptions)
-        if row[2] != "":
-            print("      {}".format(row[2]))
 
     return task_ids
 
@@ -95,14 +91,9 @@ def main():
 
         # Make a SQL table in the database
         cur.execute("""CREATE TABLE tasklist
-                       (id INTEGER PRIMARY KEY, title TEXT, description TEXT,
+                       (id INTEGER PRIMARY KEY, title TEXT,
                         finished INTEGER DEFAULT 0)
                        """)
-
-        # First task
-        # cur.execute("""INSERT INTO tasklist(title, description)
-        #               VALUES('Clean the room',
-        #                      'You need to clean your room now!')""")
 
         # Save and close the database
         con.commit()
@@ -123,10 +114,9 @@ def main():
         # Add
         if option == 'i':
             title = input("Title of task: $ ")
-            description = input("Description of task (Optional): $ ")
 
-            cur.execute("""INSERT INTO tasklist(title, description)
-                           VALUES(?, ?)""", (title, description))
+            cur.execute("""INSERT INTO tasklist(title)
+                           VALUES(?)""", (title,))
 
         # Delete
         elif option == 'd':
