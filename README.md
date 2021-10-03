@@ -22,4 +22,6 @@ A simple todo list tool made in `python` and `SQL`. Manage your tasks all from t
 
 `cd taskover`
 
+`chmod +x ./taskover`
+
 `./taskover`
