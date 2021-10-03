@@ -5,8 +5,7 @@ from os import name as os_name
 from sys import argv
 
 DATABASE = "./list.db"
-TITLE = "========TASKOVER BETA============"
-SEPARATOR = "================================="
+TITLE = "Taskover (Beta)"
 
 
 def clear():
@@ -59,6 +58,8 @@ def print_list(cursor, numbering=False):
     # Display numbers if needed to print numbers of list
     number = 1
 
+    print(TITLE)
+
     for row in rows:
         task_ids.append(row[0])
 
@@ -73,6 +74,16 @@ def print_list(cursor, numbering=False):
 
         # Print the title
         print("{}".format(row[1]))
+
+    # Print footer
+    if len(rows) > 1:
+        task_count = "{} tasks".format(len(rows))
+    elif len(rows) == 1:
+        task_count = "1 task"
+    else:
+        task_count = "no tasks"
+
+    print("--- {} ---".format(task_count))
 
     return task_ids
 
@@ -126,9 +137,8 @@ Please report bugs to https://github.com/angelofallars/taskover""")
     while True:
         clear()
 
-        print(TITLE)
         task_ids = print_list(cur)
-        print(SEPARATOR)
+
         option = input("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit\n$ ")\
         .lower()
 
@@ -141,37 +151,44 @@ Please report bugs to https://github.com/angelofallars/taskover""")
 
         # Delete
         elif option == 'd':
-            clear()
-            print(TITLE)
-            task_ids = print_list(cur, numbering=True)
-            print(SEPARATOR)
 
-            print("Which task to delete?")
-            id_to_delete = id_from_input(task_ids)
+            if len(task_ids) > 0:
+                clear()
 
-            cur.execute("""DELETE FROM tasklist WHERE id = ?""",
-                        (id_to_delete, ))
+                task_ids = print_list(cur, numbering=True)
+
+                print("Which task to delete?")
+                id_to_delete = id_from_input(task_ids)
+
+                cur.execute("""DELETE FROM tasklist WHERE id = ?""",
+                            (id_to_delete, ))
+            else:
+                print("No tasks to delete")
+                input()
 
         # Mark as done
         elif option == 'm':
-            clear()
-            print(TITLE)
-            task_ids = print_list(cur, numbering=True)
-            print(SEPARATOR)
 
-            print("Which task to mark as done/undone?")
-            id_to_mark = id_from_input(task_ids)
+            if len(task_ids) > 0:
+                clear()
 
-            cur.execute("""UPDATE tasklist
-                           SET finished = NOT finished
-                           WHERE id = ?""", (id_to_mark, ))
+                task_ids = print_list(cur, numbering=True)
+
+                print("Which task to mark as done/undone?")
+                id_to_mark = id_from_input(task_ids)
+
+                cur.execute("""UPDATE tasklist
+                               SET finished = NOT finished
+                               WHERE id = ?""", (id_to_mark, ))
+            else:
+                print("No tasks to mark as done")
+                input()
 
         # Update
         elif option == 'u':
             clear()
-            print(TITLE)
+
             task_ids = print_list(cur, numbering=True)
-            print(SEPARATOR)
 
             print("Which task description to update?")
             id_to_update = id_from_input(task_ids)
