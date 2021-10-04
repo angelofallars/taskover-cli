@@ -171,7 +171,7 @@ see 'taskover help' for more options""")
 
         task_ids = print_list(cur, vim_cursor=vim_cursor)
 
-        print("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit")
+        print("(i) Insert (u) Update (m) Mark (d) Delete (q) Quit")
 
         # Commit every time so updates are instantly reflected in database
         con.commit()
