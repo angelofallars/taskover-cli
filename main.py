@@ -1,5 +1,5 @@
 """To-do list with Python and SQL"""
-import sys, os, threading
+import sys, os
 import sqlite3, kb
 
 DATABASE = "./list.db"
