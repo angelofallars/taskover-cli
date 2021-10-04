@@ -38,7 +38,7 @@ def id_from_input(task_ids):
         return id
 
 
-def print_list(cursor, vim_cursor=0, numbering=False, extra_text=True):
+def print_list(cursor, vim_cursor=0, vim_cursor_visible=True, numbering=False, extra_text=True):
     """Print the current todo list.
 
     Returns the IDs of the tasks ordered in a list.
@@ -69,7 +69,8 @@ def print_list(cursor, vim_cursor=0, numbering=False, extra_text=True):
 
         task_ids.append(row[0])
 
-        print("* " if i == vim_cursor else "  ", end="")
+        if vim_cursor_visible:
+            print("* " if i == vim_cursor else "  ", end="")
 
         if numbering:
             print("{}. ".format(number), end="")
@@ -108,21 +109,23 @@ def main():
 
         if sys.argv[1] == "help":
             # Help message
-            print("""Taskover - A fast and hackable task list written in Python and SQL.
+            print("""Taskover - A fast and hackable task list with Vim-like
+           keybindings. Written in Python and SQL.
+
 usage: taskover [options]
 
-help
-  Display this help message.
-
-list
-  Print the tasks ordered numerically and exit. Useful for scripting.
+Options:
+  help        Display this help message.
+  list        Print the tasks ordered numerically and exit.
 
 Program keywords:
-- i - Insert a new task
-- u - Update the description of a task
-- m - Mark a task as done (or unmark a completed task)
-- d - Delete a task
-- q - Quit the program
+  j - move downwards
+  k - move upwards
+  i - Insert a new task
+  u - Update the description of a task
+  m - Mark a task as done (or unmark a completed task)
+  d - Delete a task
+  q - Quit the program
 
 Please report bugs to https://github.com/angelofallars/taskover""")
 
@@ -131,7 +134,10 @@ Please report bugs to https://github.com/angelofallars/taskover""")
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
 
-            task_ids = print_list(cur, numbering=True, extra_text=False)
+            task_ids = print_list(cur,
+                                  numbering=True,
+                                  vim_cursor_visible=False,
+                                  extra_text=False)
 
             if not task_ids:
                 print("No tasks")
