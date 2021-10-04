@@ -1,16 +1,13 @@
 """To-do list with Python and SQL"""
-import sqlite3
-from os import path, system
-from os import name as os_name
-from sys import argv
+import sys, os 
+import sqlite3, kb
 
 DATABASE = "./list.db"
 TITLE = "Taskover (Beta)"
 
-
 def clear():
     """Clear the screen."""
-    system("cls" if os_name == "nt" else "clear")
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def id_from_input(task_ids):
@@ -94,9 +91,9 @@ def print_list(cursor, numbering=False, extra_text=True):
 def main():
     """The main function"""
 
-    if len(argv) > 1:
+    if len(sys.argv) > 1:
 
-        if argv[1] == "help":
+        if sys.argv[1] == "help":
             # Help message
             print("""Taskover - A fast and hackable task list written in Python and SQL.
 usage: taskover [options]
@@ -117,7 +114,7 @@ Program keywords:
 Please report bugs to https://github.com/angelofallars/taskover""")
         
         # Print list
-        elif argv[1] == "list":
+        elif sys.argv[1] == "list":
             con = sqlite3.connect(DATABASE)
             cur = con.cursor()
 
@@ -136,7 +133,7 @@ see 'taskover help' for more options""")
     print("Taskover - A todo-list by Angelo-F")
 
     # Check if a list.db file exists
-    if not path.isfile(DATABASE):
+    if not os.path.isfile(DATABASE):
         # Create a database because it doesn't exist
         open(DATABASE, "w", encoding="utf-8").close()
         print("Created new SQL database.")
@@ -168,10 +165,11 @@ see 'taskover help' for more options""")
         # Commit every time so updates are instantly reflected in database
         con.commit()
 
-        option = input("").lower()
+        char = kb.getch()
+        print("")
 
         # Add
-        if option == 'i':
+        if char == 'i':
             title = input("Title of task: $ ")
 
             # Continue if input title is blank
@@ -182,7 +180,7 @@ see 'taskover help' for more options""")
                            VALUES(?)""", (title,))
 
         # Delete
-        elif option == 'd':
+        elif char == 'd':
 
             if len(task_ids) > 0:
                 clear()
@@ -199,7 +197,7 @@ see 'taskover help' for more options""")
                 input()
 
         # Mark as done
-        elif option == 'm':
+        elif char == 'm':
 
             if len(task_ids) > 0:
                 clear()
@@ -217,7 +215,7 @@ see 'taskover help' for more options""")
                 input()
 
         # Update
-        elif option == 'u':
+        elif char == 'u':
 
             if len(task_ids) > 0:
                 clear()
