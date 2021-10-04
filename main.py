@@ -122,7 +122,7 @@ Program keywords:
 - q - Quit the program
 
 Please report bugs to https://github.com/angelofallars/taskover""")
-        
+
         # Print list
         elif sys.argv[1] == "list":
             con = sqlite3.connect(DATABASE)
@@ -258,7 +258,7 @@ see 'taskover help' for more options""")
                                SET title = ?
                                WHERE id = ?""", (new_description,
                                    current_id))
-        
+
             else:
                 footing_message = "No tasks to update"
 
