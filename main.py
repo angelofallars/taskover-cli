@@ -14,7 +14,7 @@ def id_from_input(task_ids):
     """Get an ID of a task from user input"""
 
     while True:
-        index = input("$ ")
+        index = kb.getch()
 
         # Return none if no input
         if index == "":
@@ -165,7 +165,7 @@ see 'taskover help' for more options""")
         # Commit every time so updates are instantly reflected in database
         con.commit()
 
-        char = kb.getch()
+        char = kb.getch().lower()
         print("")
 
         # Add
@@ -242,8 +242,13 @@ see 'taskover help' for more options""")
                 input()
 
         # Exit
-        elif option == 'q':
-            break
+        elif char == 'q':
+            print("Do you really want to quit? (Y/n)")
+            char = kb.getch().lower()
+
+            if char == 'y':
+                break
+
 
     con.commit()
     con.close()
