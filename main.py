@@ -35,13 +35,14 @@ def id_from_input(task_ids):
         return id
 
 
-def print_list(cursor, numbering=False, extra_text=True):
+def print_list(cursor, vim_cursor=0, numbering=False, extra_text=True):
     """Print the current todo list.
 
     Returns the IDs of the tasks ordered in a list.
 
     Args:
         cursor - the SQL cursor
+        vim_cursor - the vim cursor that is manipulated by j, k
         numbering - add numbering to the displayed list
         extra_text - If there should be extra text above and below the tasks"""
 
@@ -59,8 +60,13 @@ def print_list(cursor, numbering=False, extra_text=True):
     if extra_text:
         print(TITLE)
 
-    for row in rows:
+    # Print the tasks
+    for i in range(len(rows)):
+        row = rows[i]
+
         task_ids.append(row[0])
+
+        print("* " if i == vim_cursor else "  ", end="")
 
         if numbering:
             print("{}. ".format(number), end="")
@@ -154,10 +160,12 @@ see 'taskover help' for more options""")
     con = sqlite3.connect(DATABASE)
     cur = con.cursor()
 
+    vim_cursor = 0
+
     while True:
         clear()
 
-        task_ids = print_list(cur)
+        task_ids = print_list(cur, vim_cursor=vim_cursor)
 
         print("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit\n$ ",
                 end="")
@@ -168,8 +176,16 @@ see 'taskover help' for more options""")
         char = kb.getch().lower()
         print("")
 
+        if char == 'j':
+            if vim_cursor < len(task_ids) - 1:
+                vim_cursor += 1
+
+        elif char == 'k':
+            if vim_cursor > 0:
+                vim_cursor -= 1
+
         # Add
-        if char == 'i':
+        elif char == 'i':
             title = input("Title of task: $ ")
 
             # Continue if input title is blank
