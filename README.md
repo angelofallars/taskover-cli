@@ -38,16 +38,21 @@ Linux:
 
 `taskover` - Run the program
 
-`taskover help` - Print the help message
-
-`taskover list` - Print your current list
-
 ```
-i - Insert a new task
-u - Update the description of a task
-m - Mark a task as done (or unmark a completed task)
-d - Delete a task
-q - Quit the program
+usage: taskover [options]
+
+Options:
+  help        Display this help message.
+  list        Print the tasks ordered numerically and exit.
+
+Program keywords:
+  j - move downwards
+  k - move upwards
+  i - Insert a new task
+  u - Update the description of a task
+  m - Mark a task as done (or unmark a completed task)
+  d - Delete a task
+  q - Quit the program
 ```
 
 ## Contributing
