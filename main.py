@@ -245,7 +245,7 @@ see 'taskover help' for more options""")
             print("Do you really want to quit? (Y/n)")
             char = kb.getch().lower()
 
-            if char == 'y' or char == '\r':
+            if char == 'y' or char == '\r' or char == 'q':
                 break
 
 
