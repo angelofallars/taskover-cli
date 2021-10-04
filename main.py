@@ -181,8 +181,6 @@ see 'taskover help' for more options""")
         cur.execute("SELECT id, title, finished FROM tasklist")
         rows = cur.fetchall()
 
-        con.commit()
-
         char = kb.getch().lower()
 
         # ==========
