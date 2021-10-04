@@ -1,5 +1,5 @@
 """To-do list with Python and SQL"""
-import sys, os 
+import sys, os, threading
 import sqlite3, kb
 
 DATABASE = "./list.db"
@@ -165,20 +165,29 @@ see 'taskover help' for more options""")
     while True:
         clear()
 
+        # Correct the position of the vim cursor if it's above the list
+        list_length = cur.execute("SELECT COUNT(*) FROM tasklist").fetchone()[0]
+        if vim_cursor >= list_length and list_length > 0:
+            vim_cursor = list_length - 1
+
+        task_ids = print_list(cur, vim_cursor)
+
+        if len(task_ids) > 0:
+            current_id = str(task_ids[vim_cursor])
+
+        print("(i) Insert (u) Update (m) Mark (d) Delete (q) Quit")
+
         # Get the current task list in rows
         cur.execute("SELECT id, title, finished FROM tasklist")
         rows = cur.fetchall()
 
-        task_ids = print_list(cur, vim_cursor=vim_cursor)
-
-        print("(i) Insert (u) Update (m) Mark (d) Delete (q) Quit")
-
-        # Commit every time so updates are instantly reflected in database
         con.commit()
 
         char = kb.getch().lower()
 
+        # ==========
         # Vim Keybindings
+        # ==========
         if char == 'j':
             if vim_cursor < len(task_ids) - 1:
                 vim_cursor += 1
@@ -186,7 +195,9 @@ see 'taskover help' for more options""")
             if vim_cursor > 0:
                 vim_cursor -= 1
 
+        # ==========
         # Add
+        # ==========
         elif char == 'i':
             title = input("Title of task: $ ")
 
@@ -197,7 +208,9 @@ see 'taskover help' for more options""")
             cur.execute("""INSERT INTO tasklist(title)
                            VALUES(?)""", (title,))
 
+        # ==========
         # Delete
+        # ==========
         elif char == 'd':
 
             if len(task_ids) > 0:
@@ -206,24 +219,28 @@ see 'taskover help' for more options""")
                 char = kb.getch().lower()
                 if char == 'd' or char == '\r':
                     cur.execute("""DELETE FROM tasklist WHERE id = ?""",
-                                (str(task_ids[vim_cursor]), ))
+                                (current_id, ))
 
             else:
                 print("No tasks to delete")
                 input()
 
+        # ==========
         # Mark as done
+        # ==========
         elif char == 'm':
 
             if len(task_ids) > 0:
                 cur.execute("""UPDATE tasklist
                                SET finished = NOT finished
-                               WHERE id = ?""", (task_ids[vim_cursor], ))
+                               WHERE id = ?""", (current_id, ))
             else:
                 print("No tasks to mark as done")
                 input()
 
+        # ==========
         # Update
+        # ==========
         elif char == 'u':
 
             if len(task_ids) > 0:
@@ -235,16 +252,19 @@ see 'taskover help' for more options""")
                 cur.execute("""UPDATE tasklist
                                SET title = ?
                                WHERE id = ?""", (new_description,
-                                   str(task_ids[vim_cursor])))
+                                   current_id))
+        
             else:
                 print("No tasks to update")
                 input()
 
+        # ==========
         # Exit
+        # ==========
         elif char == 'q':
             print("Do you really want to quit? (Y/n)")
-            char = kb.getch().lower()
 
+            char = kb.getch().lower()
             if char == 'y' or char == '\r' or char == 'q':
                 break
 
