@@ -165,6 +165,10 @@ see 'taskover help' for more options""")
     while True:
         clear()
 
+        # Get the current task list in rows
+        cur.execute("SELECT id, title, finished FROM tasklist")
+        rows = cur.fetchall()
+
         task_ids = print_list(cur, vim_cursor=vim_cursor)
 
         print("(i) Insert (u) Update (m) Mark as done (d) Delete (q) Quit\n$ ",
@@ -176,10 +180,10 @@ see 'taskover help' for more options""")
         char = kb.getch().lower()
         print("")
 
+        # Vim Keybindings
         if char == 'j':
             if vim_cursor < len(task_ids) - 1:
                 vim_cursor += 1
-
         elif char == 'k':
             if vim_cursor > 0:
                 vim_cursor -= 1
@@ -201,13 +205,15 @@ see 'taskover help' for more options""")
             if len(task_ids) > 0:
                 clear()
 
-                task_ids = print_list(cur, numbering=True)
+                task_ids = print_list(cur, vim_cursor)
 
-                print("Which task to delete?")
-                id_to_delete = id_from_input(task_ids)
+                print("Delete task \"{}\"? (D/n)".format(rows[vim_cursor][1]))
 
-                cur.execute("""DELETE FROM tasklist WHERE id = ?""",
-                            (id_to_delete, ))
+                char = kb.getch().lower()
+                if char == 'd' or char == '\r':
+                    cur.execute("""DELETE FROM tasklist WHERE id = ?""",
+                                (str(task_ids[vim_cursor]), ))
+
             else:
                 print("No tasks to delete")
                 input()
@@ -217,15 +223,9 @@ see 'taskover help' for more options""")
 
             if len(task_ids) > 0:
                 clear()
-
-                task_ids = print_list(cur, numbering=True)
-
-                print("Which task to mark as done/undone?")
-                id_to_mark = id_from_input(task_ids)
-
                 cur.execute("""UPDATE tasklist
                                SET finished = NOT finished
-                               WHERE id = ?""", (id_to_mark, ))
+                               WHERE id = ?""", (task_ids[vim_cursor], ))
             else:
                 print("No tasks to mark as done")
                 input()
