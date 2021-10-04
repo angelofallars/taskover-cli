@@ -78,7 +78,11 @@ def print_list(cursor, vim_cursor=0, numbering=False, extra_text=True):
             print("[ ] ", end="")
 
         # Print the title
-        print("{}".format(row[1]))
+        if not row[2]:
+            print("{}".format(row[1]))
+        else:
+            # Strike-through completed tasks
+            print("\u0336".join("{}".format(row[1])) + "\u0336")
 
     # Print footer
     if len(rows) > 1:
