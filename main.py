@@ -3,7 +3,7 @@ import sys, os, threading
 import sqlite3, kb
 
 DATABASE = "./list.db"
-TITLE = "Taskover (Beta)"
+TITLE = "Taskover"
 
 def clear():
     """Clear the screen."""
@@ -161,6 +161,7 @@ see 'taskover help' for more options""")
     cur = con.cursor()
 
     vim_cursor = 0
+    footing_message = ""
 
     while True:
         clear()
@@ -176,6 +177,7 @@ see 'taskover help' for more options""")
             current_id = str(task_ids[vim_cursor])
 
         print("(i) Insert (u) Update (m) Mark (d) Delete (q) Quit")
+        print(footing_message)
 
         # Get the current task list in rows
         cur.execute("SELECT id, title, finished FROM tasklist")
@@ -197,6 +199,8 @@ see 'taskover help' for more options""")
         # Add
         # ==========
         elif char == 'i':
+            footing_message = ""
+
             title = input("Title of task: $ ")
 
             # Continue if input title is blank
@@ -210,6 +214,7 @@ see 'taskover help' for more options""")
         # Delete
         # ==========
         elif char == 'd':
+            footing_message = ""
 
             if len(task_ids) > 0:
                 print("Delete task \"{}\"? (D/n)".format(rows[vim_cursor][1]))
@@ -220,8 +225,7 @@ see 'taskover help' for more options""")
                                 (current_id, ))
 
             else:
-                print("No tasks to delete")
-                input()
+                footing_message = "No tasks to delete"
 
         # ==========
         # Mark as done
@@ -233,8 +237,7 @@ see 'taskover help' for more options""")
                                SET finished = NOT finished
                                WHERE id = ?""", (current_id, ))
             else:
-                print("No tasks to mark as done")
-                input()
+                footing_message = "No tasks to mark as done"
 
         # ==========
         # Update
@@ -253,8 +256,7 @@ see 'taskover help' for more options""")
                                    current_id))
         
             else:
-                print("No tasks to update")
-                input()
+                footing_message = "No tasks to update"
 
         # ==========
         # Exit
