@@ -169,13 +169,12 @@ see 'taskover help' for more options""")
 
     while True:
         clear()
+        task_ids = print_list(cur, vim_cursor)
 
         # Correct the position of the vim cursor if it's above the list
         list_length = cur.execute("SELECT COUNT(*) FROM tasklist").fetchone()[0]
         if vim_cursor >= list_length and list_length > 0:
             vim_cursor = list_length - 1
-
-        task_ids = print_list(cur, vim_cursor)
 
         if len(task_ids) > 0:
             current_id = str(task_ids[vim_cursor])
