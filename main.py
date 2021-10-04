@@ -1,9 +1,12 @@
 """To-do list with Python and SQL"""
-import sys, os
-import sqlite3, kb
+import sys
+import os
+import sqlite3
+import kb
 
 DATABASE = "./list.db"
 TITLE = "Taskover"
+
 
 def clear():
     """Clear the screen."""
@@ -139,7 +142,6 @@ see 'taskover help' for more options""")
 
         return 0
 
-
     print("Taskover - A todo-list by Angelo-F")
 
     # Check if a list.db file exists
@@ -171,7 +173,8 @@ see 'taskover help' for more options""")
         clear()
 
         # Correct the position of the vim cursor if it's above the list
-        list_length = cur.execute("SELECT COUNT(*) FROM tasklist").fetchone()[0]
+        list_length = cur.execute("SELECT COUNT(*) FROM tasklist")\
+            .fetchone()[0]
         if vim_cursor >= list_length and list_length > 0:
             vim_cursor = list_length - 1
 
@@ -257,7 +260,7 @@ see 'taskover help' for more options""")
                 cur.execute("""UPDATE tasklist
                                SET title = ?
                                WHERE id = ?""", (new_description,
-                                   current_id))
+                                                 current_id))
 
             else:
                 footing_message = "No tasks to update"
@@ -271,7 +274,6 @@ see 'taskover help' for more options""")
             char = kb.getch().lower()
             if char == 'y' or char == '\r' or char == 'q':
                 break
-
 
     con.commit()
     con.close()
