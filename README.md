@@ -1,17 +1,15 @@
-# Taskover
+# 📕 Taskover <a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
 
-A simple and fast todo list with Vim-like keybindings made in `Python`.
+<img src="https://i.imgur.com/PBA0LaH.png" alt="taskover command line interface" align="right" height="240px">
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+**Taskover** is a simple and fast todo list with Vim-like keybindings made in `Python`.
 
-![image](https://i.imgur.com/PBA0LaH.png)
-
-Stay on top of your tasks with this terminal-based tool!
-
-Add tasks with ease, mark them as done and delete them when you're finished.
-And if you use Vim, this program's commands will be familiar.
+- Add tasks swiftly, mark them as done and delete them when you're finished.
+- If you use Vim, this program's commands will be familiar.
 
 This program is minimal and only requires Python 3. If you know some Python, it's easy to hack and change this program to suit your needs.
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white) 
 
 ## Dependencies
 
