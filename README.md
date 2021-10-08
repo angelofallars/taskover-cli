@@ -25,9 +25,7 @@ Unix-based (Linux)
 
 `chmod +x ./taskover`
 
-`ln -s $(pwd)/taskover ~/.local/bin`
-
-`taskover`
+`./taskover`
 
 Windows
 
