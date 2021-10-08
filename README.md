@@ -15,7 +15,9 @@ This program is minimal and only requires Python 3. If you know some Python, it'
 
 `python3`
 
-## Installation
+## How to run
+
+Unix-based (Linux)
 
 `git clone https://github.com/angelofallars/taskover`
 
@@ -23,12 +25,17 @@ This program is minimal and only requires Python 3. If you know some Python, it'
 
 `chmod +x ./taskover`
 
-`ln -s </path/to/taskover/executable> ~/.local/bin`
+`ln -s $(pwd)/taskover ~/.local/bin`
 
-~~Run on Windows:~~
+`taskover`
 
-~~`python3 .\taskover`~~ (Windows support is not yet implemented for this
-        version.)
+Windows
+
+`git clone https://github.com/angelofallars/taskover`
+
+`cd taskover`
+
+`python3 .\main.py`
 
 ## Usage
 
