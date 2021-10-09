@@ -3,8 +3,10 @@ import sys
 import os
 import sqlite3
 import kb
+import xdg
 
-DATABASE = "./list.db"
+DIRECTORY = str(xdg.xdg_config_home()) + "/taskover"
+DATABASE = DIRECTORY + "/list.db"
 TITLE = "Taskover"
 
 
@@ -152,6 +154,12 @@ see 'taskover help' for more options""")
 
     # Check if a list.db file exists
     if not os.path.isfile(DATABASE):
+
+        # Create the directory if it doesn't exist
+        if not os.path.isdir(DIRECTORY):
+            print("Created config directory in $XDG_CONFIG_HOME.")
+            os.mkdir(DIRECTORY)
+
         # Create a database because it doesn't exist
         open(DATABASE, "w", encoding="utf-8").close()
         print("Created new SQL database.")

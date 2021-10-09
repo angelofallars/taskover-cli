@@ -15,6 +15,8 @@ This program is minimal and only requires Python 3. If you know some Python, it'
 
 `python3`
 
+`xdg`
+
 ## How to run
 
 Unix-based (Linux)
@@ -27,7 +29,7 @@ Unix-based (Linux)
 
 `./taskover`
 
-Windows
+~~Windows~~ (Not supported in this version again)
 
 `git clone https://github.com/angelofallars/taskover`
 
